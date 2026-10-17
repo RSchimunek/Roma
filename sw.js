@@ -4,7 +4,7 @@
    es gibt also nichts, was sich unterwegs aendern muesste.
    Bei neuem Inhalt die VERSION hochzaehlen - das wirft den alten Cache weg. */
 
-const VERSION = "roma-v1";
+const VERSION = "roma-v2";
 const DATEIEN = [
   "./",
   "index.html",
@@ -17,7 +17,8 @@ const DATEIEN = [
 self.addEventListener("install", (e) => {
   e.waitUntil(
     caches.open(VERSION)
-      .then((c) => c.addAll(DATEIEN))
+      // cache: "reload" umgeht den HTTP-Cache (Pages: max-age=600), sonst landet ein Altstand im neuen Cache
+      .then((c) => c.addAll(DATEIEN.map((u) => new Request(u, { cache: "reload" }))))
       .then(() => self.skipWaiting())
   );
 });
