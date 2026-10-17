@@ -1,0 +1,4 @@
+# Keine Zeilenenden-Umschreibung. Fuer guide.enc existenziell: jede
+# veraenderte Byte-Folge macht die AES-GCM-Pruefsumme ungueltig und die
+# App laesst sich nicht mehr entsperren.
+* -text
